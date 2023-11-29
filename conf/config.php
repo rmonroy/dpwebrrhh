@@ -6,7 +6,7 @@ class Base{
     private static $servidor='http://localhost';
     private static $puerto = '';
     //variabe con el nombre de la carpeta raiz
-    private static $proyecto='rrhh';
+    private static $proyecto='dpwebrrhh';
     //variable para construir la direccion url
     private static $direccion;
     //variable para llevar el nombre de ubicacion de archivos
