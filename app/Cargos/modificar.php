@@ -26,7 +26,8 @@ include('../template/Menu.php');
                     <div class="input-group-prepend">
                     <span class="input-group-text">Cargo</span>
                     </div>
-                    <input name="txCargo" type="text" class="form-control" placeholder="Ej. Jefatura" required>
+                    <input name="txCargo" type="text" class="form-control" value="<?php echo 'jefe'; ?>"
+                    placeholder="Ej. Jefatura" required>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

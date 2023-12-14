@@ -1,6 +1,17 @@
 <?php
 //llaando funciones de uso general ( clase Base)
 include_once('conf/config.php');
+
+session_start();
+$nomb;
+if(!isset($_SESSION['usr'])) { 
+    header('location:app/usuarios/login.php');
+} else {
+    $nomb=$_SESSION['usr'];
+}
+
+
+
 //llamando componentes de página
 include('app/template/Cabecera.php');
 include('app/template/Menu.php');

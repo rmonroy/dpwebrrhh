@@ -1,5 +1,6 @@
 <?php
 include_once('../../conf/config.php');
+include_once('../../conf/bd.php');
 
 //llamado encabezado
 include('../template/Cabecera.php');
@@ -41,17 +42,44 @@ include('../template/Cabecera.php');
                     </div>
                     <?php
 
+                    session_start();
+
                     if (isset($_POST['btn-ingresar'])){
                         //header("location:http://localhost/rrhh/");
                         //capturamos el momento de clic del button
-                        if($_POST['user'] == ""){
+                        $us=$_POST['user'];
+                        $ps=$_POST['passwd'];
+                        
+                        $datousr = DatosB::mostrarUsuario($us, $ps);
+                        //capturando datos recuperados de la BD
+                        $nmb = $datousr['Nombre'];
+                        $rol = $datousr['rolId'];
+
+                        $rsp = DatosB::validarUsuario($us, $ps);
+
+                        
+                        if($rsp==1){    
+                            $_SESSION['usr']=$nmb;
+                            $_SESSION['rol']=$rol;
+
+                            //$direccion = 'location:' . Base::url() . '';
+                            header('location:http://localhost/dpwebrrhh-main/'); //$direccion);
+                        } elseif($rsp==2){
                             echo '<diV class="alert alert-danger">';
                             echo '<div class="form-group">';
-                            echo '<p>un campo debe ser completado</p>';
+                            echo '<p>El usuario no esta activo,comuniquese con soporte</p>';
+                            echo "</diV> </div>";
+                        } elseif($rsp==3){
+                            echo '<diV class="alert alert-danger">';
+                            echo '<div class="form-group">';
+                            echo '<p>El usuario y la contraseña no coinciden, comuniquese con soporte</p>';
                             echo "</diV> </div>";
                         } else {
-                            header("location:http://localhost/rrhh/");
-                            // validar usuarios
+                            
+                            echo '<diV class="alert alert-danger">';
+                            echo '<div class="form-group">';
+                            echo '<p>El usuario no se pudo encontrar, comuniquese con soporte</p>';
+                            echo "</diV> </div>";
                         }
                     
                     }

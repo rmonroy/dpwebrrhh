@@ -2,6 +2,14 @@
 include_once('../../conf/config.php');
 include_once('../../conf/bd.php');
 
+session_start();
+$nomb;
+if(!isset($_SESSION['usr'])) { 
+    header('location:login.php');
+} else {
+    $nomb=$_SESSION['usr'];
+}
+
 include('../template/Cabecera.php');
 
 include('../template/Menu.php');
